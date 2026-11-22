@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Descriptor del arquetipo foro-arquetipo: define los parametros que se piden al generar
+  un microservicio y que archivos del proyecto base se copian (y cuales se filtran con Velocity).
+-->
+<archetype-descriptor xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.2.0 https://maven.apache.org/xsd/archetype-descriptor-1.2.0.xsd" name="foro-arquetipo"
+    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.2.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <requiredProperties>
+    <!-- Prefijo de la clase principal: UserService -> UserServiceApplication -->
+    <requiredProperty key="nombreClase"/>
+    <!-- Puerto local del microservicio (en el Cloud se usa la variable PORT) -->
+    <requiredProperty key="puerto">
+      <defaultValue>8080</defaultValue>
+    </requiredProperty>
+    <!-- Truco para incluir el .gitignore: Maven excluye ese nombre al empaquetar el arquetipo -->
+    <requiredProperty key="gitignore">
+      <defaultValue>.gitignore</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+
+  <fileSets>
+    <!-- Codigo fuente: se ubica dentro del paquete elegido (package) -->
+    <fileSet filtered="true" packaged="true" encoding="UTF-8">
+      <directory>src/main/java</directory>
+      <includes>
+        <include>**/*.java</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/main/resources</directory>
+      <includes>
+        <include>**/*.properties</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>src/main/resources</directory>
+      <includes>
+        <include>**/*.sql</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" packaged="true" encoding="UTF-8">
+      <directory>src/test/java</directory>
+      <includes>
+        <include>**/*.java</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>.mvn/wrapper</directory>
+      <includes>
+        <include>**/*.properties</include>
+      </includes>
+    </fileSet>
+    <!-- Dockerfile filtrado para usar el puerto elegido -->
+    <fileSet filtered="true" encoding="UTF-8">
+      <includes>
+        <include>Dockerfile</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <includes>
+        <include>.dockerignore</include>
+        <include>__gitignore__</include>
+        <include>mvnw</include>
+        <include>mvnw.cmd</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</archetype-descriptor>

@@ -1,0 +1,4 @@
+-- ============================================================
+-- Script de base de datos del microservicio (Oracle Cloud)
+-- Crear aqui las tablas y los datos iniciales del servicio.
+-- ============================================================
