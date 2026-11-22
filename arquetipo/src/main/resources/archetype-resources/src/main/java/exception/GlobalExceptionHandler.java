@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingRequestHeaderException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -50,6 +51,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MissingRequestHeaderException.class)
     public ResponseEntity<ErrorResponse> headerFaltante(MissingRequestHeaderException ex) {
         return respuesta(HttpStatus.BAD_REQUEST, "Falta el header " + ex.getHeaderName(), null);
+    }
+
+    // Falta un parametro obligatorio de la URL (?nombre=...)
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ErrorResponse> parametroFaltante(MissingServletRequestParameterException ex) {
+        return respuesta(HttpStatus.BAD_REQUEST, "Falta el parametro " + ex.getParameterName(), null);
     }
 
     @ExceptionHandler({HttpMessageNotReadableException.class, MethodArgumentTypeMismatchException.class})
