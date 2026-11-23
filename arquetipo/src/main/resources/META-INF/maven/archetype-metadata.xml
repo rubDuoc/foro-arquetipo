@@ -61,6 +61,7 @@
     <fileSet encoding="UTF-8">
       <includes>
         <include>.dockerignore</include>
+        <include>docker-entrypoint.sh</include>
         <include>__gitignore__</include>
         <include>mvnw</include>
         <include>mvnw.cmd</include>
